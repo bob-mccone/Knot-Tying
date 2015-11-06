@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Knot tying</title>
+    @Styles.Render("~/Content/css")<!--css files for layout-->
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="text-muted">@Html.ActionLink("Learning how to tie knots", "Index", "Home")</h3> <!--comment example-->
+            <ul class="nav nav-justified">
+                <li>@Html.ActionLink("About", "About", "Home")</li> <!--navigation bar (Label, file, controller the file is in)-->
+                <li>@Html.ActionLink("History", "History", "Home")</li>
+                <li>@Html.ActionLink("Tutorials", "Tutorials", "Home")</li>
+                <li>@Html.ActionLink("UploadCentre", "UploadCentre", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Competition", "Index", "Competition")</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Knot tying inc</p><!--copyright symbol along with the current date-->
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")<!--pre made script files that were made when you make another project-->
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

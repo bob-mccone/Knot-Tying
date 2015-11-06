@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Thankyou";
+}
+<!--this is the view nodel that we are using-->
+@model Knot_Tying.Models.CompetitionViewModel
+
+<h2>Thank you</h2><!--header-->
+
+<h3>We would like to thank you for your submission, you are now into the draw for a computer. Good luck!!</h3><!--header-->
+
+<!--this will go to the home page when completed-->
+@using (Html.BeginForm("Index", "Home"))
+{ 
+    <div>
+        <h4>Competition submission</h4><!--header-->
+        <fieldset>
+            <ul>
+                <li>
+                    <label for="CompetitionEntry_School_NAME">SCHOOL NAME</label><!--label for school name-->
+                    @Html.DisplayFor(m => m.CompetitionEntry.School.NAME)<!--displays the school name that the student entered-->
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.CompetitionEntry.CLASSROOM)<!--label for classroom-->
+                    @Html.DisplayFor(m => m.CompetitionEntry.CLASSROOM)<!--display the classroom that the student entered-->
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.CompetitionEntry.Email)<!--label for email-->
+                    @Html.DisplayFor(m => m.CompetitionEntry.Email)<!--display the email that the student entered-->
+                </li>
+                <li>
+                    <label for="CompetitionEntry_School_TELEPHONE"> SCHOOL TELEPHONE</label><!--label for school email-->
+                    @Html.DisplayFor(m => m.CompetitionEntry.School.TELEPHONE)<!--displays the telephone number that the student entered-->
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.CompetitionEntry.School.ADDRESS)<!--label for school address-->
+                    @Html.DisplayFor(m => m.CompetitionEntry.School.ADDRESS)<!--displays the address that the student entered-->
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.CompetitionQuestion.QUESTION)<!--label for the question-->
+                    @Html.DisplayFor(m => m.CompetitionQuestion.QUESTION)<!--displays the competition question-->
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.SelectedAnswer)<!--label for the question-->
+                    @Html.DisplayFor(m => m.AnsStr)<!--displays the answer that the student has chosen for the question-->
+                </li>
+            </ul>
+        </fieldset>
+        <input class="btn" type="submit" value="Home" /><!--goes back to the hime page when clicked-->
+    </div>
+}

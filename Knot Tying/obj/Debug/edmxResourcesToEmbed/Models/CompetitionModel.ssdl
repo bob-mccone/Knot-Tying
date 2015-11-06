@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="COMPETITIONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ANSWER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Answer_Text" Type="varchar" MaxLength="255" />
+    <Property Name="IS_CORRECT" Type="bit" />
+    <Property Name="CMQ_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Competition">
+    <Key>
+      <PropertyRef Name="COMP_ID" />
+    </Key>
+    <Property Name="COMP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="varchar" MaxLength="255" />
+    <Property Name="START_DATE" Type="datetime" />
+    <Property Name="END_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CompetitionEntry">
+    <Key>
+      <PropertyRef Name="CompEntry_ID" />
+    </Key>
+    <Property Name="CompEntry_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" />
+    <Property Name="CLASSROOM" Type="varchar" MaxLength="255" />
+    <Property Name="SCHOOL_ID" Type="int" />
+    <Property Name="GIVEN_ANSWER_ID" Type="int" />
+    <Property Name="COMP_ID" Type="int" />
+    <Property Name="CMQ_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="CompetitionQuestion">
+    <Key>
+      <PropertyRef Name="CMQ_ID" />
+    </Key>
+    <Property Name="CMQ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QUESTION" Type="varchar" MaxLength="255" />
+    <Property Name="COMP_ID" Type="int" />
+    <Property Name="CORRECT_ANSWER_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="255" />
+    <Property Name="TELEPHONE" Type="varchar" MaxLength="255" />
+    <Property Name="ADDRESS" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__ANSWER__CMQ_ID__1BFD2C07">
+    <End Role="CompetitionQuestion" Type="Self.CompetitionQuestion" Multiplicity="0..1" />
+    <End Role="ANSWER" Type="Self.ANSWER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompetitionQuestion">
+        <PropertyRef Name="CMQ_ID" />
+      </Principal>
+      <Dependent Role="ANSWER">
+        <PropertyRef Name="CMQ_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competiti__CMQ_I__1CF15040">
+    <End Role="CompetitionQuestion" Type="Self.CompetitionQuestion" Multiplicity="0..1" />
+    <End Role="CompetitionEntry" Type="Self.CompetitionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompetitionQuestion">
+        <PropertyRef Name="CMQ_ID" />
+      </Principal>
+      <Dependent Role="CompetitionEntry">
+        <PropertyRef Name="CMQ_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competiti__COMP___1DE57479">
+    <End Role="Competition" Type="Self.Competition" Multiplicity="0..1" />
+    <End Role="CompetitionEntry" Type="Self.CompetitionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competition">
+        <PropertyRef Name="COMP_ID" />
+      </Principal>
+      <Dependent Role="CompetitionEntry">
+        <PropertyRef Name="COMP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competiti__COMP___20C1E124">
+    <End Role="Competition" Type="Self.Competition" Multiplicity="0..1" />
+    <End Role="CompetitionQuestion" Type="Self.CompetitionQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competition">
+        <PropertyRef Name="COMP_ID" />
+      </Principal>
+      <Dependent Role="CompetitionQuestion">
+        <PropertyRef Name="COMP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competiti__CORRE__21B6055D">
+    <End Role="ANSWER" Type="Self.ANSWER" Multiplicity="0..1" />
+    <End Role="CompetitionQuestion" Type="Self.CompetitionQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompetitionQuestion">
+        <PropertyRef Name="CORRECT_ANSWER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competiti__GIVEN__1ED998B2">
+    <End Role="ANSWER" Type="Self.ANSWER" Multiplicity="0..1" />
+    <End Role="CompetitionEntry" Type="Self.CompetitionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompetitionEntry">
+        <PropertyRef Name="GIVEN_ANSWER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competiti__SCHOO__1FCDBCEB">
+    <End Role="School" Type="Self.School" Multiplicity="0..1" />
+    <End Role="CompetitionEntry" Type="Self.CompetitionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompetitionEntry">
+        <PropertyRef Name="SCHOOL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetAnswers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pQUESTION_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetSuggestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pSearch" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SetUpQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="COMPETITIONModelStoreContainer">
+    <EntitySet Name="ANSWER" EntityType="Self.ANSWER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompetitionEntry" EntityType="Self.CompetitionEntry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompetitionQuestion" EntityType="Self.CompetitionQuestion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ANSWER__CMQ_ID__1BFD2C07" Association="Self.FK__ANSWER__CMQ_ID__1BFD2C07">
+      <End Role="CompetitionQuestion" EntitySet="CompetitionQuestion" />
+      <End Role="ANSWER" EntitySet="ANSWER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Competiti__CMQ_I__1CF15040" Association="Self.FK__Competiti__CMQ_I__1CF15040">
+      <End Role="CompetitionQuestion" EntitySet="CompetitionQuestion" />
+      <End Role="CompetitionEntry" EntitySet="CompetitionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Competiti__COMP___1DE57479" Association="Self.FK__Competiti__COMP___1DE57479">
+      <End Role="Competition" EntitySet="Competition" />
+      <End Role="CompetitionEntry" EntitySet="CompetitionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Competiti__COMP___20C1E124" Association="Self.FK__Competiti__COMP___20C1E124">
+      <End Role="Competition" EntitySet="Competition" />
+      <End Role="CompetitionQuestion" EntitySet="CompetitionQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Competiti__CORRE__21B6055D" Association="Self.FK__Competiti__CORRE__21B6055D">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="CompetitionQuestion" EntitySet="CompetitionQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Competiti__GIVEN__1ED998B2" Association="Self.FK__Competiti__GIVEN__1ED998B2">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="CompetitionEntry" EntitySet="CompetitionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Competiti__SCHOO__1FCDBCEB" Association="Self.FK__Competiti__SCHOO__1FCDBCEB">
+      <End Role="School" EntitySet="School" />
+      <End Role="CompetitionEntry" EntitySet="CompetitionEntry" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

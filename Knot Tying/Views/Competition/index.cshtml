@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "index";
+}
+<!--this is the view model that we are using-->
+@model Knot_Tying.Models.CompetitionViewModel
+
+<h2>Competition</h2><!--header-->
+
+<div>
+    <!--this uses the competitionsaveaction method in the competition controller-->
+    @using (Html.BeginForm("Index", "Competition"))
+    {
+        <div>
+            <h4>Win a computer</h4><!--header-->
+            <fieldset>
+                <ul>
+                    <li>
+                        <label for="CompetitionEntry_School_NAME">SCHOOL NAME</label><!--this will display a label with school name on it, this is modified-->
+                        @Html.TextBoxFor(m => m.CompetitionEntry.School.NAME)<!--this will display the textbox for the school name entry-->
+                        <script src="/Scripts/schoolnamecompletion.js"></script><!--this is the script that will run for auto complete-->
+                        @Html.ValidationMessageFor(m => m.CompetitionEntry.School.NAME)<!--this is the validation message that will appear if unusual data is entered-->
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.CompetitionEntry.CLASSROOM)<!--this is the other way to do a label, this one uses the same name from the database, if you want it to be different then use the previous label-->
+                        @Html.TextBoxFor(m => m.CompetitionEntry.CLASSROOM)<!--textbox for classroom-->
+                        @Html.ValidationMessageFor(m => m.CompetitionEntry.CLASSROOM)<!--validation message for classroom-->
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.CompetitionEntry.Email)<!--label for email-->
+                        @Html.TextBoxFor(m => m.CompetitionEntry.Email)<!--textbox for email-->
+
+                        @Html.ValidationMessageFor(m => m.CompetitionEntry.Email)<!--validation message for email-->
+                    </li>
+
+                    <li>
+                        <label for="CompetitionEntry_School_TELEPHONE"> SCHOOL TELEPHONE</label><!--label for school telephone-->
+                        @Html.TextBoxFor(m => m.CompetitionEntry.School.TELEPHONE)<!--textbox for school telephone-->
+                        @Html.ValidationMessageFor(m => m.CompetitionEntry.School.TELEPHONE)<!--validation message for school telephone-->
+                    </li>
+                    <li>
+
+                        @Html.LabelFor(m => m.CompetitionEntry.School.ADDRESS) <!--label for the school address-->
+                        @Html.TextBoxFor(m => m.CompetitionEntry.School.ADDRESS) <!--textbox for school address-->
+                        @Html.ValidationMessageFor(m => m.CompetitionEntry.School.ADDRESS) <!--validation message for the school address-->
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.CompetitionEntry.CompetitionQuestion.QUESTION) <br> <!--label for the question-->
+                        @Html.DisplayFor(m => m.CompetitionQuestion.QUESTION) <!--this will display the question that it gets from the database-->
+                        <ul>
+                            <!--this is a for loop that will get all of the answers that are in the databases-->
+                            @foreach (var item in Model.Answers) 
+                            {
+                                <li>
+                                    @Html.DisplayFor(modelItem => item.Answer_Text) <!--this will display each answer onto the webpage-->
+                                    @Html.RadioButtonFor(model => model.SelectedAnswer, item.ID, true) <!--this will display a radio button for each question-->
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </fieldset>
+            <input class="btn" type="submit" value="Send" /> <!--this button will submit the data to the datbase-->
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="COMPETITIONModelStoreContainer" CdmEntityContainer="COMPETITIONEntities">
+    <EntitySetMapping Name="ANSWERs">
+      <EntityTypeMapping TypeName="COMPETITIONModel.ANSWER">
+        <MappingFragment StoreEntitySet="ANSWER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Answer_Text" ColumnName="Answer_Text" />
+          <ScalarProperty Name="IS_CORRECT" ColumnName="IS_CORRECT" />
+          <ScalarProperty Name="CMQ_ID" ColumnName="CMQ_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competitions">
+      <EntityTypeMapping TypeName="COMPETITIONModel.Competition">
+        <MappingFragment StoreEntitySet="Competition">
+          <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompetitionEntries">
+      <EntityTypeMapping TypeName="COMPETITIONModel.CompetitionEntry">
+        <MappingFragment StoreEntitySet="CompetitionEntry">
+          <ScalarProperty Name="CompEntry_ID" ColumnName="CompEntry_ID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CLASSROOM" ColumnName="CLASSROOM" />
+          <ScalarProperty Name="SCHOOL_ID" ColumnName="SCHOOL_ID" />
+          <ScalarProperty Name="GIVEN_ANSWER_ID" ColumnName="GIVEN_ANSWER_ID" />
+          <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
+          <ScalarProperty Name="CMQ_ID" ColumnName="CMQ_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompetitionQuestions">
+      <EntityTypeMapping TypeName="COMPETITIONModel.CompetitionQuestion">
+        <MappingFragment StoreEntitySet="CompetitionQuestion">
+          <ScalarProperty Name="CMQ_ID" ColumnName="CMQ_ID" />
+          <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+          <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
+          <ScalarProperty Name="CORRECT_ANSWER_ID" ColumnName="CORRECT_ANSWER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schools">
+      <EntityTypeMapping TypeName="COMPETITIONModel.School">
+        <MappingFragment StoreEntitySet="School">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetAnswers" FunctionName="COMPETITIONModel.Store.GetAnswers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="COMPETITIONModel.GetAnswers_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Answer_Text" ColumnName="Answer_Text" />
+          <ScalarProperty Name="IS_CORRECT" ColumnName="IS_CORRECT" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetQuestion" FunctionName="COMPETITIONModel.Store.GetQuestion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="COMPETITIONModel.GetQuestion_Result">
+          <ScalarProperty Name="COMP_ID" ColumnName="COMP_ID" />
+          <ScalarProperty Name="CMQ_ID" ColumnName="CMQ_ID" />
+          <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSuggestion" FunctionName="COMPETITIONModel.Store.GetSuggestion" />
+    <FunctionImportMapping FunctionImportName="SetUpQuestions" FunctionName="COMPETITIONModel.Store.SetUpQuestions" />
+  </EntityContainerMapping>
+</Mapping>

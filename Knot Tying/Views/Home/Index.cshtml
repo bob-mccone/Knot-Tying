@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function() //when the document is ready not when it is fully loaded the animation will happen
+    {
+        $("#comp").animate({
+            left: '10%', opacity: '0.1'
+        }, 500).animate({
+            left: '20%', opacity: '1.0'
+        }, 500).animate({
+            left: '30%', opacity: '0.1'
+        }, 500).animate({
+            left: '40%', opacity: '1.0'
+        }, 500).animate({
+            left: '50%', opacity: '0.1'
+        }, 500).animate({
+            left: '60%', opacity: '1.0'
+        }, 500).animate({
+            left: '70%', opacity: '0.1'
+        }, 500).animate({
+            left: '80%', opacity: '1.0'
+        }, 500).animate({
+            left: '90%', opacity: '0.1'
+        }, 500).animate({
+            left: '100%', opacity: '1.0'
+        }, 500) //this will make the image move from the left to the right accross the page while fading in and out in 5 seconds, using chaining
+            .fadeOut(1000); //this will fade the image out when it has reached the destination
+    });
+</script>
+
+<div>
+    <a href="/Competition"> <!--this is where the user will be sent when they click on the image-->
+        <img id="comp" src="~/Content/images/competitionpicture.jpg" alt="Competition time" style="width:auto;height:auto;border:0;position:absolute" /> <!--this is where the image is stored and how it will look-->
+    </a>
+</div>
+
+<div class="jumbotron"><!--this is the main div that spans across the page-->
+    <h1>Welcome</h1>
+    <p class="lead">This website will give you the skills and knowledge on how to tie knots.</p>
+    <p><a href="Home/About" class="btn btn-primary btn-lg">Learn more &raquo;</a></p> <!--will go to the about page-->
+</div>
+
+<div class="row"><!--this will display 3 divs in a row-->
+    <div class="col-lg-4">
+        <h2>Getting started</h2><!--getting started header-->
+        <p>
+            Visit the tutorials page to get started and to see what other people have been doing.
+        </p>
+        <p><a class="btn btn-default" href="Home/Tutorials">Learn more &raquo;</a></p> <!--will go to the tutorials page-->
+    </div>
+    <div class="col-lg-4">
+        <h2>History</h2><!--history header-->
+        <p>If you don't want to find out how to tie knots then you can learn about the history of knot tying and how it all started.</p>
+        <p><a class="btn btn-default" href="Home/History">Learn more &raquo;</a></p> <!--will go to the history page-->
+    </div>
+    <div class="col-lg-4">
+        <h2>Uploading</h2><!--upload header-->
+        <p>Already have knot tying knowledge? Then you can show people how to tie knots.</p>
+        <p><a class="btn btn-default" href="Home/UploadCentre">Learn more &raquo;</a></p><!--will go to the upload page-->
+    </div>
+</div>
